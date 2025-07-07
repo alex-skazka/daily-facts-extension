@@ -70,15 +70,15 @@ class FactOptions {
   }
 
   populateSettings() {
-    // Only show category selection for pro/premium users
+    // Only show category selection for premium users
     const categorySection = document.querySelector(".form-group")
     if (this.settings.tier === "free") {
       categorySection.style.opacity = "0.5"
       categorySection.style.pointerEvents = "none"
       const description = categorySection.querySelector(".description")
-      description.textContent = "Upgrade to Pro or Premium to choose your favorite categories."
+      description.textContent = "Upgrade to Premium to choose your favorite categories."
     } else {
-      // Populate categories for pro/premium users
+      // Populate categories for premium users
       this.settings.categories.forEach((category) => {
         const checkbox = document.getElementById(category)
         if (checkbox) checkbox.checked = true
@@ -92,7 +92,7 @@ class FactOptions {
     // Disable frequency options for free tier
     if (this.settings.tier === "free") {
       document.querySelectorAll('input[name="frequency"]').forEach((radio) => {
-        if (!["daily", "manual"].includes(radio.value)) {
+        if (!["daily"].includes(radio.value)) {
           radio.disabled = true
           radio.parentElement.style.opacity = "0.5"
         }
@@ -104,7 +104,7 @@ class FactOptions {
   }
 
   async saveSettings() {
-    // Collect categories (only for pro/premium)
+    // Collect categories (only for premium)
     const categories = []
     if (this.settings.tier !== "free") {
       document.querySelectorAll('.checkbox-group input[type="checkbox"]:checked').forEach((checkbox) => {
@@ -307,7 +307,7 @@ class FactOptions {
 
       if (response.success) {
         this.showSuccessMessage(
-          `Payment successful! ${this.selectedTier.charAt(0).toUpperCase() + this.selectedTier.slice(1)} features unlocked forever!`,
+          `Payment successful! Premium features unlocked forever! Enjoy unlimited facts and custom scheduling.`,
         )
         this.settings.tier = this.selectedTier
         this.settings.isPremium = true

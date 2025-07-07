@@ -68,12 +68,12 @@ class FactPopup {
 
     // Enable/disable save button based on tier
     const saveBtn = document.getElementById("saveFactBtn")
-    if (this.settings.tier === "pro") {
+    if (this.settings.tier === "premium") {
       saveBtn.disabled = false
       saveBtn.textContent = "Save"
     } else {
       saveBtn.disabled = true
-      saveBtn.textContent = "Pro Only"
+      saveBtn.textContent = "Premium Only"
     }
   }
 
@@ -110,7 +110,7 @@ class FactPopup {
   async saveFact() {
     if (!this.currentFact) return
 
-    if (this.settings.tier !== "pro") {
+    if (this.settings.tier !== "premium") {
       this.showUpgradePrompt()
       return
     }
@@ -151,41 +151,15 @@ class FactPopup {
   `
 
     modal.innerHTML = `
-    <div style="
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-      font-family: 'Manrope', sans-serif;
-    ">
+    <div style="background: white; padding: 30px; border-radius: 12px; max-width: 400px; width: 90%; text-align: center; font-family: 'Manrope', sans-serif;">
       <div style="font-size: 48px; margin-bottom: 15px;">🔒</div>
-      <h3 style="color: var(--teal); margin-bottom: 15px; font-weight: 700;">Pro Feature</h3>
+      <h3 style="color: var(--teal); margin-bottom: 15px; font-weight: 700;">Premium Feature</h3>
       <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.5;">
-        Saving facts is a Pro feature. Upgrade to Pro for just <strong>$4.99</strong> to save unlimited facts and unlock all premium features!
+        Saving facts is a Premium feature. Upgrade to Premium for just <strong>$3.99</strong> to save unlimited facts, set your own schedule, and unlock all premium features!
       </p>
       <div style="display: flex; gap: 10px; justify-content: center;">
-        <button onclick="this.parentElement.parentElement.parentElement.remove()" style="
-          padding: 10px 20px;
-          background: #e9ecef;
-          color: #6c757d;
-          border: none;
-          border-radius: 6px;
-          cursor: pointer;
-          font-family: 'Manrope', sans-serif;
-          font-weight: 600;
-        ">Maybe Later</button>
-        <button onclick="window.chrome.tabs.create({url: window.chrome.runtime.getURL('options.html#payment')}); this.parentElement.parentElement.parentElement.remove();" style="
-          padding: 10px 20px;
-          background: var(--pink);
-          color: white;
-          border: none;
-          border-radius: 6px;
-          cursor: pointer;
-          font-family: 'Manrope', sans-serif;
-          font-weight: 600;
-        ">Upgrade to Pro</button>
+        <button onclick="this.parentElement.parentElement.parentElement.remove()" style="padding: 10px 20px; background: #e9ecef; color: #6c757d; border: none; border-radius: 6px; cursor: pointer; font-family: 'Manrope', sans-serif; font-weight: 600;">Maybe Later</button>
+        <button onclick="window.chrome.tabs.create({url: window.chrome.runtime.getURL('options.html#payment')}); this.parentElement.parentElement.parentElement.remove();" style="padding: 10px 20px; background: var(--pink); color: white; border: none; border-radius: 6px; cursor: pointer; font-family: 'Manrope', sans-serif; font-weight: 600;">Upgrade to Premium</button>
       </div>
     </div>
   `
@@ -205,8 +179,7 @@ class FactPopup {
     const tierBadge = document.getElementById("tierBadge")
     const tierNames = {
       free: "Free Tier",
-      pro: "Pro", // Changed from premium
-      premium: "Premium", // Changed from pro
+      premium: "Premium",
     }
 
     tierBadge.textContent = tierNames[this.settings.tier]

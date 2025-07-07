@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "scripts/backend-api.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/scripts/backend-api.js"
+    },
+    {
+      "src": "/health",
+      "dest": "/scripts/backend-api.js"
+    },
+    {
+      "src": "/database-manager.html",
+      "dest": "/database-manager.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/scripts/backend-api.js"
+    }
+  ],
+  "env": {
+    "STRIPE_SECRET_KEY": "@stripe_secret_key"
+  },
+  "functions": {
+    "scripts/backend-api.js": {
+      "maxDuration": 30
+    }
+  }
+}

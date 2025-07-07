@@ -49,9 +49,9 @@ class FactExtension {
           "tech",
           "century",
         ], // Free tier gets all categories but limited facts
-        frequency: "low", // Free tier: 3 facts/day
+        frequency: "daily", // Free tier: 5 facts/day at random times
         notifications: true,
-        tier: "free", // free, premium, pro
+        tier: "free", // free, premium (removed pro)
         isPremium: false,
         lastFactTime: 0,
         factHistory: [],

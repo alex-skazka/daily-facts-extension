@@ -1,527 +1,214 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Daily Facts - Settings</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Options</title>
   <style>
-    :root {
-      --teal: #1A5244;
-      --pink: #B33B71;
-      --gold: #C19A6B;
-      --bg-light: #f8f9fa;
-      --text-primary: #2c3e50;
-      --text-secondary: #6c757d;
-      --border-color: #e9ecef;
-    }
-
     body {
-      font-family: 'Manrope', sans-serif;
-      margin: 0;
+      font-family: sans-serif;
       padding: 20px;
-      background: var(--bg-light);
-      color: var(--text-primary);
-    }
-    
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-    
-    .header {
-      background: linear-gradient(135deg, var(--teal) 0%, #0f3a2d 100%);
-      color: white;
-      padding: 40px 30px;
-      text-align: center;
     }
 
-    .header h1 {
-      margin: 0 0 10px 0;
-      font-weight: 700;
-      font-size: 2.2rem;
+    h1 {
+      margin-bottom: 20px;
     }
 
-    .header p {
-      margin: 0;
-      opacity: 0.9;
-      font-size: 1.1rem;
-    }
-    
-    .tabs {
-      display: flex;
-      border-bottom: 1px solid var(--border-color);
-      background: white;
-    }
-    
-    .tab {
-      flex: 1;
-      padding: 18px 20px;
-      text-align: center;
+    .tab-button {
+      padding: 10px 20px;
+      border: 1px solid #ccc;
+      background-color: #f0f0f0;
       cursor: pointer;
-      border: none;
-      background: none;
-      font-size: 14px;
-      font-weight: 600;
-      font-family: 'Manrope', sans-serif;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-    }
-    
-    .tab.active {
-      background: var(--teal);
-      color: white;
+      margin-right: 5px;
     }
 
-    .tab:hover:not(.active) {
-      background: var(--bg-light);
-      color: var(--text-primary);
+    .tab-button.active {
+      background-color: #ddd;
     }
-    
+
     .tab-content {
-      padding: 30px;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+
+    .hidden {
       display: none;
     }
-    
-    .tab-content.active {
-      display: block;
-    }
-    
-    .form-group {
-      margin-bottom: 25px;
-    }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: 600;
-      color: var(--text-primary);
-      font-size: 15px;
-    }
 
-    .form-group .description {
-      color: var(--text-secondary);
-      font-size: 14px;
-      margin-bottom: 15px;
-      line-height: 1.5;
-    }
-    
-    .checkbox-group {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-      margin-top: 10px;
-    }
-    
-    .checkbox-item {
+    /* Payment Section Styles */
+    .pricing-cards {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px;
-      border: 2px solid var(--border-color);
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .pricing-card {
+      border: 1px solid #ccc;
       border-radius: 8px;
-      transition: all 0.3s ease;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
     }
 
-    .checkbox-item:hover {
-      border-color: var(--teal);
-      background: rgba(26, 82, 68, 0.05);
+    .pricing-card.premium {
+      border-color: #ffc107; /* Example: Gold color for premium */
     }
 
-    .checkbox-item input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
+    .pricing-header {
+      margin-bottom: 20px;
     }
 
-    .checkbox-item label {
-      margin: 0;
-      font-weight: 500;
-      cursor: pointer;
-    }
-    
-    .radio-group {
-      display: flex;
-      gap: 15px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-    
-    .radio-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 16px;
-      border: 2px solid var(--border-color);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .radio-item:hover {
-      border-color: var(--teal);
-      background: rgba(26, 82, 68, 0.05);
-    }
-
-    .radio-item input[type="radio"]:checked + label {
-      color: var(--teal);
-      font-weight: 600;
-    }
-    
-    .save-btn {
-      background: var(--teal);
-      color: white;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
-      font-family: 'Manrope', sans-serif;
-      transition: all 0.3s ease;
-    }
-
-    .save-btn:hover {
-      background: #0f3a2d;
-      transform: translateY(-2px);
-    }
-    
-    .premium-features {
-      background: linear-gradient(135deg, rgba(26, 82, 68, 0.1) 0%, rgba(179, 59, 113, 0.1) 100%);
-      padding: 25px;
-      border-radius: 10px;
-      margin-bottom: 25px;
-    }
-
-    .premium-features h3 {
-      color: var(--teal);
-      margin-bottom: 15px;
-      font-weight: 700;
-    }
-
-    .premium-features ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .premium-features li {
-      padding: 8px 0;
-      position: relative;
-      padding-left: 25px;
-    }
-
-    .premium-features li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--teal);
+    .price {
+      font-size: 2em;
       font-weight: bold;
     }
-    
-    .pricing-card {
-      border: 2px solid var(--border-color);
-      border-radius: 12px;
-      padding: 25px;
+
+    .price span {
+      font-size: 0.5em;
+      font-weight: normal;
+    }
+
+    .pricing-features {
       margin-bottom: 20px;
-      position: relative;
-      transition: all 0.3s ease;
     }
 
-    .pricing-card:hover {
-      border-color: var(--teal);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    }
-    
-    .pricing-card.recommended {
-      border-color: var(--pink);
-      background: linear-gradient(135deg, rgba(179, 59, 113, 0.05) 0%, rgba(193, 154, 107, 0.05) 100%);
-    }
-    
-    .pricing-card.recommended::before {
-      content: 'Most Popular';
-      position: absolute;
-      top: -12px;
-      left: 25px;
-      background: var(--pink);
-      color: white;
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    .feature {
+      margin-bottom: 10px;
     }
 
-    .pricing-card h4 {
-      margin: 0 0 10px 0;
-      color: var(--text-primary);
-      font-weight: 700;
-      font-size: 1.3rem;
-    }
-
-    .pricing-card .price {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--teal);
-      margin: 15px 0;
-    }
-
-    .pricing-card .features {
-      list-style: none;
-      padding: 0;
-      margin: 20px 0;
-    }
-
-    .pricing-card .features li {
-      padding: 6px 0;
-      color: var(--text-secondary);
-    }
-
-    .pricing-card button {
-      width: 100%;
-      padding: 14px;
-      background: var(--teal);
+    .pricing-button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
       color: white;
       border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      font-family: 'Manrope', sans-serif;
-      transition: all 0.3s ease;
+      border-radius: 5px;
       cursor: pointer;
+      font-size: 1em;
     }
 
-    .pricing-card button:hover {
-      background: #0f3a2d;
-      transform: translateY(-2px);
+    .pricing-button.premium {
+      background-color: #ffc107; /* Example: Gold color for premium */
+      color: black;
     }
-    
-    .history-item {
-      padding: 15px;
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+
+    .comparison-table {
+      width: 100%;
+      overflow-x: auto; /* For smaller screens */
     }
-    
-    .history-fact {
-      flex: 1;
-      margin-right: 15px;
+
+    .comparison-table table {
+      width: 100%;
+      border-collapse: collapse;
     }
-    
-    .history-meta {
-      font-size: 12px;
-      color: var(--text-secondary);
-      text-align: right;
+
+    .comparison-table th, .comparison-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
     }
-    
-    #stripeElements {
-      margin: 20px 0;
-    }
-    
-    .payment-form {
-      max-width: 400px;
+
+    .comparison-table th {
+      background-color: #f2f2f2;
     }
   </style>
-  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Daily Facts Settings</h1>
-      <p>Customize your fact delivery experience</p>
-    </div>
-    
-    <div class="tabs">
-      <button class="tab active" data-tab="preferences">Preferences</button>
-      <button class="tab" data-tab="history">History</button>
-      <button class="tab" data-tab="saved">Saved Facts</button>
-      <button class="tab" data-tab="payment">Premium</button>
-    </div>
-    
-    <div id="preferences" class="tab-content active">
-      <div class="form-group">
-        <label>Fact Categories</label>
-        <p class="description">
-          Select the topics you're interested in learning about.
-        </p>
-        <p class="subheader" style="font-size: 13px; color: var(--teal); font-weight: 600; margin-bottom: 15px;">
-          💡 The more categories you choose, the more facts will be available to you
-        </p>
-        <div class="checkbox-group">
-          <div class="checkbox-item">
-            <input type="checkbox" id="animals" value="animals">
-            <label for="animals">Animals</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="history" value="history">
-            <label for="history">History</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="space" value="space">
-            <label for="space">Space</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="biology" value="biology">
-            <label for="biology">Biology</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="languages" value="languages">
-            <label for="languages">Languages</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="food" value="food">
-            <label for="food">Food</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="geography" value="geography">
-            <label for="geography">Geography</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="science" value="science">
-            <label for="science">Science</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="culture" value="culture">
-            <label for="culture">Culture</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="records" value="records">
-            <label for="records">Records</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="inventions" value="inventions">
-            <label for="inventions">Inventions</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="sports" value="sports">
-            <label for="sports">Sports</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="tech" value="tech">
-            <label for="tech">Tech</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="century" value="century">
-            <label for="century">Century</label>
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label>Notification Frequency</label>
-        <p class="description">
-          How often would you like to receive fact notifications?
-        </p>
-        <div class="radio-group">
-          <div class="radio-item">
-            <input type="radio" id="30min" name="frequency" value="30min">
-            <label for="30min">Every 30 minutes</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="1hour" name="frequency" value="1hour">
-            <label for="1hour">Every hour</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="2hours" name="frequency" value="2hours">
-            <label for="2hours">Every 2 hours</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="daily" name="frequency" value="daily">
-            <label for="daily">Once a day</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="manual" name="frequency" value="manual">
-            <label for="manual">When I click extension</label>
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="checkbox-item">
-          <input type="checkbox" id="notifications">
-          <label for="notifications">Enable push notifications</label>
-        </div>
-      </div>
-      
-      <button id="saveSettings" class="save-btn">Save Settings</button>
-    </div>
-    
-    <div id="history" class="tab-content">
-      <h3>Your Fact History</h3>
-      <p style="color: #666; margin-bottom: 20px;">
-        Here are the facts you've received recently. Facts won't repeat for 6 months.
-      </p>
-      <div id="historyList">
-        <!-- History items will be populated by JavaScript -->
-      </div>
-    </div>
+  <h1>Options</h1>
 
-    <div id="saved" class="tab-content">
-      <h3>Saved Facts</h3>
-      <p style="color: #666; margin-bottom: 20px;">
-        Here are the facts you've saved for later.
-      </p>
-      <div id="savedList">
-        <!-- Saved items will be populated by JavaScript -->
-      </div>
-    </div>
-    
-    <div id="payment" class="tab-content">
-      <div class="premium-features">
-        <h3>Premium Features</h3>
-        <ul>
-          <li>Unlimited daily facts</li>
-          <li>Access to all fact categories</li>
-          <li>Custom notification timing</li>
-          <li>Fact sources and references</li>
-          <li>Export your fact history</li>
-          <li>Advanced filtering options</li>
-        </ul>
-      </div>
-      
-      <div class="pricing-card">
-        <h4>Pro</h4>
-        <div class="price">
-          $3.99 <span style="font-size: 14px; color: var(--text-secondary); font-weight: 400;">one-time</span>
-        </div>
-        <ul class="features">
-          <li>Unlimited daily facts</li>
-          <li>Choose your favorite categories</li>
-          <li>Custom notification frequency</li>
-          <li>Pause notifications</li>
-        </ul>
-        <button class="save-btn" data-price="price_pro_onetime" data-tier="pro">Upgrade to Pro</button>
-      </div>
-      
-      <div class="pricing-card recommended">
-        <h4>Premium</h4>
-        <div class="price">
-          $4.99 <span style="font-size: 14px; color: var(--text-secondary); font-weight: 400;">one-time</span>
-        </div>
-        <ul class="features">
-          <li>Everything in Pro, plus:</li>
-          <li>Save facts for later review</li>
-          <li>Access to fact sources</li>
-          <li>Export your collection</li>
-          <li>Priority support</li>
-        </ul>
-        <button class="save-btn" data-price="price_premium_onetime" data-tier="premium">Upgrade to Premium</button>
-      </div>
-      
-      <div id="paymentForm" class="payment-form" style="display: none;">
-        <h4>Complete Your Purchase</h4>
-        <p style="color: var(--text-secondary); margin-bottom: 15px;">One-time payment - no recurring charges!</p>
-        <div id="stripeElements"></div>
-        <button id="submitPayment" class="save-btn">Complete Purchase</button>
-      </div>
-    </div>
+  <div class="tabs">
+    <button class="tab-button active" data-tab="general">General</button>
+    <button class="tab-button" data-tab="payment">Payment</button>
   </div>
-  
-  <script src="options.js"></script>
+
+  <div class="tab-content" id="general">
+    <h2>General Settings</h2>
+    <label for="factFrequency">Fact Frequency:</label>
+    <select id="factFrequency">
+      <option value="daily">Daily</option>
+      <option value="weekly">Weekly</option>
+    </select>
+  </div>
+
+  <div class="tab-content hidden" id="payment">
+    <h2>Payment Options</h2>
+    <p>Choose your subscription plan:</p>
+
+    <div class="pricing-cards">
+  <div class="pricing-card premium">
+    <div class="pricing-header">
+      <h3>Premium</h3>
+      <div class="price">$3.99 <span>one-time</span></div>
+    </div>
+    <div class="pricing-features">
+      <div class="feature">✅ Unlimited facts per day</div>
+      <div class="feature">✅ Choose your delivery schedule</div>
+      <div class="feature">✅ Select favorite categories</div>
+      <div class="feature">✅ Save facts you love</div>
+      <div class="feature">✅ No ads, forever</div>
+    </div>
+    <button class="pricing-button premium" data-price="price_premium" data-tier="premium">
+      Upgrade to Premium
+    </button>
+  </div>
+</div>
+
+<div class="comparison-table">
+  <h3>Feature Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Free</th>
+        <th>Premium</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Daily Facts</td>
+        <td>5 facts/day</td>
+        <td>Unlimited</td>
+      </tr>
+      <tr>
+        <td>Delivery Schedule</td>
+        <td>Random times</td>
+        <td>Your choice</td>
+      </tr>
+      <tr>
+        <td>Category Selection</td>
+        <td>All categories (random)</td>
+        <td>Choose favorites</td>
+      </tr>
+      <tr>
+        <td>Save Facts</td>
+        <td>❌</td>
+        <td>✅</td>
+      </tr>
+      <tr>
+        <td>Ads</td>
+        <td>None</td>
+        <td>None</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </div>
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Deactivate all buttons and hide all content
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.add('hidden'));
+
+        // Activate the clicked button and show its content
+        button.classList.add('active');
+        const tabId = button.dataset.tab;
+        document.getElementById(tabId).classList.remove('hidden');
+      });
+    });
+  </script>
 </body>
 </html>
